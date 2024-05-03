@@ -1,0 +1,39 @@
+{
+    "name": "prisma-generator-handlebars",
+    "version": "0.1.0",
+    "description": "Generate any text files from Prisma schema with Handlebars templates.",
+    "keywords": [
+        "prisma",
+        "generator",
+        "handlebars"
+    ],
+    "license": "MIT",
+    "type": "module",
+    "files": [
+        "dist/"
+    ],
+    "exports": null,
+    "bin": "dist/bin.js",
+    "scripts": {
+        "build": "rm -r dist && tsc -d",
+        "format": "biome check src --apply",
+        "test": "vitest run"
+    },
+    "dependencies": {
+        "@prisma/generator-helper": "^5.13.0",
+        "change-case": "^5.4.4",
+        "handlebars": "^4.7.8",
+        "pluralize": "^8.0.0"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^1.7.1",
+        "@types/node": "^20.12.7",
+        "@types/pluralize": "^0.0.33",
+        "prisma": "^5.13.0",
+        "typescript": "^5.4.5",
+        "vitest": "^1.6.0"
+    },
+    "engines": {
+        "node": "^18.17.0 || ^20.2.0 || >=22.0.0"
+    }
+}
