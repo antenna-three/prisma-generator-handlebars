@@ -10,7 +10,9 @@
     "license": "MIT",
     "type": "module",
     "files": [
-        "dist/"
+        "dist/",
+        "!dist/**/*.spec.js",
+        "!dist/**/*.spec.d.ts"
     ],
     "exports": null,
     "bin": "dist/bin.js",

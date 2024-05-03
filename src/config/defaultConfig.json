@@ -1,0 +1,8 @@
+{
+	"output": "generated",
+	"inputBasePath": ".",
+	"templates": "templates",
+	"partials": "partials",
+	"helpers": "helpers.js",
+	"options": "options.js"
+}
