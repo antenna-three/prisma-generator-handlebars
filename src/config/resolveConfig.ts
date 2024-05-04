@@ -1,6 +1,5 @@
 import { resolve } from 'node:path'
 import type { GeneratorOptions } from '@prisma/generator-helper'
-import { mapEntries } from '../utils/mapEntries.js'
 import defaultConfig from './defaultConfig.json' assert { type: 'json' }
 
 export type Config = typeof defaultConfig
@@ -14,16 +13,24 @@ export function resolveConfig(options: GeneratorOptions): Config {
 }
 
 function resolveInputConfig(options: GeneratorOptions): Omit<Config, 'output'> {
-	const { inputBasePath, ...restConfig } = mapEntries(
+	const { inputBasePath, ...requiredConfig } = mapValues(
 		defaultInputConfig,
-		([key, value]) => [key, first(options.generator.config[key]) ?? value],
+		(value, key) => first(options.generator.config[key]) ?? value,
 	)
-	const resolvedBasePath = resolve(options.schemaPath, '..', inputBasePath)
-	const resolvedConfig = mapEntries(restConfig, ([key, value]) => [
-		key,
-		resolve(resolvedBasePath, value),
-	])
-	return { ...resolvedConfig, inputBasePath: resolvedBasePath }
+	const absoluteBasePath = resolve(options.schemaPath, '..', inputBasePath)
+	const absoluteConfig = mapValues(requiredConfig, (value) =>
+		resolve(absoluteBasePath, value),
+	)
+	return { ...absoluteConfig, inputBasePath: absoluteBasePath }
+}
+
+function mapValues<K extends string, T, U>(
+	object: Record<K, T>,
+	mapper: (value: T, key: string) => U,
+): Record<K, U> {
+	return Object.fromEntries(
+		Object.entries<T>(object).map(([key, value]) => [key, mapper(value, key)]),
+	) as Record<K, U>
 }
 
 function first(config: string | string[] | undefined): string | undefined {

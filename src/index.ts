@@ -4,7 +4,8 @@ import { resolveConfig } from './config/resolveConfig.js'
 import { generate } from './generate.js'
 import { readInputFiles } from './io/readInputFiles.js'
 import { writeFiles } from './io/writeFiles.js'
-import { throwWithStack } from './utils/throwWithStack.js'
+
+Error.stackTraceLimit = 2
 
 helper.generatorHandler({
 	onManifest() {
@@ -21,7 +22,10 @@ helper.generatorHandler({
 			const outputs = generate(input, options.dmmf)
 			await writeFiles(config.output, outputs)
 		} catch (e) {
-			throwWithStack(e)
+			// Printing error stack traces to stdout because Prisma does not
+			// print stack traces and stderr is used to communicate with Prisma.
+			console.log(e)
+			throw e
 		}
 	},
 })
