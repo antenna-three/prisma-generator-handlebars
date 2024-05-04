@@ -1,0 +1,22 @@
+{{#each models}}
+type {{ pascalCase name }} implements Node {
+    {{#each fields}}
+    {{#if isList}}
+    {{ camelCase name }}(first: Int, after: ID, last: Int, before: ID, where: {{ pascalCase name }}WhereInput, orderBy: {{ pascalCase name }}OrderByInput): {{ pascalCase name }}Connection!
+    {{else}}
+    {{ camelCase name }}: {{ type }}
+    {{/if}}
+    {{/each}}
+}
+
+type {{ pascalCase name }}Edge {
+    node: {{ pascalCase name }}!
+    cursor: ID!
+}
+
+type {{ pascalCase name }}Connection {
+    edges: [{{ pascalCase name }}Edge!]!
+    pageInfo: PageInfo!
+}
+
+{{/each}}

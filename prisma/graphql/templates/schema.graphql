@@ -1,0 +1,8 @@
+interface Node {
+    id: ID!
+}
+
+{{> relay/models.graphql models=datamodel.models }}
+{{> enums.graphql models=datamodel.enums }}
+{{> inputs.graphql inputs=schema.inputObjectTypes.prisma }}
+{{> relay/operations.graphql operations=mappings.modelOperations }}

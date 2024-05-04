@@ -1,0 +1,17 @@
+Models:
+
+{{#each datamodel.models}}
+- {{ name }}
+    {{#each fields}}
+    - {{ name }}
+    {{/each}}
+{{/each}}
+
+Enums:
+
+{{#each datamodel.enums}}
+- {{ name }}
+    {{#each values}}
+    - {{name}}
+    {{/each}}
+{{/each}}

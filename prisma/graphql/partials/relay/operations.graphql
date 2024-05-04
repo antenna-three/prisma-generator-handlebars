@@ -1,0 +1,14 @@
+type Query {
+    {{#each operations}}
+    {{ camelCase model }}(id: ID!): {{ pascalCase model}}
+    {{ camelCase (pluralize model) }}(first: Int, after: ID, last: Int, before: ID, where: {{ pascalCase model }}WhereInput, orderBy: {{ pascalCase model }}OrderByInput): {{ pascalCase model }}Connection!
+    {{/each}}
+}
+
+type Mutation {
+    {{#each operations}}
+    create{{ pascalCase model }}(input: {{ pascalCase model }}CreateInput): {{ pascalCase model }}
+    update{{ pascalCase model }}(id: ID!, input: {{ pascalCase model }}UpdateInput): {{ pascalCase model }}
+    delete{{ pascalCase model }}(id: ID!): {{ pascalCase model }}
+    {{/each}}
+}

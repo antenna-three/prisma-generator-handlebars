@@ -1,0 +1,8 @@
+{{#each enums}}
+enum {{ name }} {
+    {{#each values}}
+    {{ name }}
+    {{/each}}
+}
+
+{{/each}}

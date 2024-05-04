@@ -1,0 +1,8 @@
+{{#each inputs}}
+input {{ name }} {
+    {{#each fields}}
+    {{ name }}: {{ inputType }}
+    {{/each}}
+}
+
+{{/each}}

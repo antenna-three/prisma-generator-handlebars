@@ -1,0 +1,12 @@
+{{#each models}}
+type {{ pascalCase name }} {
+    {{#each fields}}
+    {{#if isList}}
+    {{ camelCase name }}(take: Int, skip: Int, where: {{ pascalCase name }}WhereInput, orderBy: {{ pascalCase name }}OrderByInput): [{{ type }}]!
+    {{else}}
+    {{ camelCase name }}: {{ type }}
+    {{/if}}
+    {{/each}}
+}
+
+{{/each}}
