@@ -7,6 +7,9 @@
         "generator",
         "handlebars"
     ],
+    "author": "antenna-three",
+    "homepage": "https://github.com/antenna-three/prisma-generator-handlebars#readme",
+    "bugs": "https://github.com/antenna-three/prisma-generator-handlebars/issues",
     "license": "MIT",
     "type": "module",
     "files": [
@@ -15,7 +18,13 @@
         "!dist/**/*.spec.d.ts"
     ],
     "exports": null,
-    "bin": "dist/bin.js",
+    "bin": {
+        "prisma-generator-handlebars": "dist/bin.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/antenna-three/prisma-generator-handlebars.git"
+    },
     "scripts": {
         "build": "rm -r dist && tsc -d",
         "format": "biome check src --apply",
