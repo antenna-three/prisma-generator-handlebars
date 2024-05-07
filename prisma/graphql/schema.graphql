@@ -1,5 +1,14 @@
+scalar DateTime
+
 interface Node {
     id: ID!
+}
+
+type PageInfo {
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: ID
+    endCursor: ID
 }
 
 type User implements Node {
@@ -7,7 +16,7 @@ type User implements Node {
     email: String!
     type: UserType!
     name: String
-    posts(first: Int, after: ID, last: Int, before: ID, where: PostsWhereInput, orderBy: PostsOrderByInput): PostsConnection!
+    posts(first: Int, after: ID, last: Int, before: ID, where: PostWhereInput, orderBy: PostOrderByInput): PostConnection!
 }
 
 type UserEdge {
@@ -985,11 +994,66 @@ input PostUncheckedUpdateManyWithoutAuthorInput {
     viewCount: IntFieldUpdateOperationsInput
 }
 
+input IntFieldRefInput {
+    _ref: String
+    _container: String
+}
+
+input ListIntFieldRefInput {
+    _ref: String
+    _container: String
+}
+
+input StringFieldRefInput {
+    _ref: String
+    _container: String
+}
+
+input ListStringFieldRefInput {
+    _ref: String
+    _container: String
+}
+
+input EnumUserTypeFieldRefInput {
+    _ref: String
+    _container: String
+}
+
+input ListEnumUserTypeFieldRefInput {
+    _ref: String
+    _container: String
+}
+
+input DateTimeFieldRefInput {
+    _ref: String
+    _container: String
+}
+
+input ListDateTimeFieldRefInput {
+    _ref: String
+    _container: String
+}
+
+input BooleanFieldRefInput {
+    _ref: String
+    _container: String
+}
+
+input FloatFieldRefInput {
+    _ref: String
+    _container: String
+}
+
+input ListFloatFieldRefInput {
+    _ref: String
+    _container: String
+}
+
 type Query {
     user(id: ID!): User
-    users(first: Int, after: ID, last: Int, before: ID, where: UserWhereInput, orderBy: UserOrderByInput): UserConnection!
+    users(first: Int, after: ID, last: Int, before: ID, where: UserWhereInput, orderBy: UserOrderByWithRelationInput): UserConnection!
     post(id: ID!): Post
-    posts(first: Int, after: ID, last: Int, before: ID, where: PostWhereInput, orderBy: PostOrderByInput): PostConnection!
+    posts(first: Int, after: ID, last: Int, before: ID, where: PostWhereInput, orderBy: PostOrderByWithRelationInput): PostConnection!
 }
 
 type Mutation {

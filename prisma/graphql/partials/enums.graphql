@@ -1,7 +1,11 @@
 {{#each enums}}
 enum {{ name }} {
     {{#each values}}
+    {{#if name}}
     {{ name }}
+    {{else}}
+    {{this}}
+    {{/if}}
     {{/each}}
 }
 

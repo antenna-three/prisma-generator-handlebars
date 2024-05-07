@@ -2,9 +2,9 @@
 type {{ pascalCase name }} {
     {{#each fields}}
     {{#if isList}}
-    {{ camelCase name }}(take: Int, skip: Int, where: {{ pascalCase name }}WhereInput, orderBy: {{ pascalCase name }}OrderByInput): [{{ type }}]!
+    {{ camelCase name }}(take: Int, skip: Int, where: {{ type }}WhereInput, orderBy: {{ type }}OrderByInput): [{{ fieldType }}]!
     {{else}}
-    {{ camelCase name }}: {{ type }}
+    {{ camelCase name }}: {{ fieldType }}
     {{/if}}
     {{/each}}
 }
