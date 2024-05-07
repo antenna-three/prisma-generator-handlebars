@@ -1,8 +1,19 @@
+scalar DateTime
+
 interface Node {
     id: ID!
 }
 
+type PageInfo {
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: ID
+    endCursor: ID
+}
+
 {{> relay/models.graphql models=datamodel.models }}
 {{> enums.graphql models=datamodel.enums }}
+{{> enums.graphql models=schema.enumTypes.prisma }}
 {{> inputs.graphql inputs=schema.inputObjectTypes.prisma }}
+{{> inputs.graphql inputs=schema.fieldRefTypes.prisma }}
 {{> relay/operations.graphql operations=mappings.modelOperations }}

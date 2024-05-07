@@ -2,7 +2,7 @@
  * @this {import('@prisma/generator-helper').DMMF.Field}
  * @returns {string}
  */
-export function type() {
+export function fieldType() {
 	return `${this.isId ? 'ID' : this.type}${this.isRequired ? '!' : ''}`
 }
 
@@ -21,7 +21,7 @@ export function inputType() {
 		['inputObjectTypes', 'enumTypes', 'scalar', 'fieldRefTypes'].indexOf(
 			field.location,
 		)
-	return type.bind(
+	return fieldType.bind(
 		Array.from(this.inputTypes).sort((a, b) => priority(a) - priority(b))[0],
 	)()
 }

@@ -8,10 +8,12 @@ import { writeFiles } from './io/writeFiles.js'
 Error.stackTraceLimit = 2
 
 helper.generatorHandler({
-	onManifest() {
+	onManifest(generator) {
+		const reset = '\u001b[0m'
+		const bold = '\u001b[1m'
 		return {
 			defaultOutput: defaultConfig.output,
-			prettyName: 'Prisma Handlebars generator',
+			prettyName: `${generator.name}${reset} provided by ${bold}prisma-generator-handlebars`,
 			version: process.env.npm_package_version,
 		}
 	},
