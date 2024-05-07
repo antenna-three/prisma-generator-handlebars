@@ -4,16 +4,19 @@ import { resolveConfig } from './resolveConfig.js'
 
 test('default config', () => {
 	const options = {
-		generator: { config: {} },
+		generator: {
+			config: {},
+			output: { value: '/path/to/output' },
+		},
 		schemaPath: '/path/to/schema.prisma',
 	} as GeneratorOptions
 	expect(resolveConfig(options)).toEqual({
-		output: 'generated',
+		output: '/path/to/output',
 		inputBasePath: '/path/to',
 		templates: '/path/to/templates',
 		partials: '/path/to/partials',
 		helpers: '/path/to/helpers.js',
-		options: '/path/to/options.js'
+		options: '/path/to/options.js',
 	})
 })
 
@@ -38,7 +41,7 @@ describe('custom config', () => {
 			templates: '/path/to/custom/base/custom/templates',
 			partials: '/path/to/custom/base/custom/partials',
 			helpers: '/path/to/custom/base/custom/helpers.js',
-			options: '/path/to/custom/base/custom/options.js'
+			options: '/path/to/custom/base/custom/options.js',
 		})
 	})
 
@@ -50,7 +53,7 @@ describe('custom config', () => {
 					templates: '/custom/templates',
 					partials: 'custom/partials',
 					helpers: '/custom/helpers.js',
-					options: 'custom/options.js'
+					options: 'custom/options.js',
 				} as Record<string, string>,
 				output: { value: '/path/to/custom/output' },
 			},
@@ -62,7 +65,7 @@ describe('custom config', () => {
 			templates: '/custom/templates',
 			partials: '/custom/base/custom/partials',
 			helpers: '/custom/helpers.js',
-			options: '/custom/base/custom/options.js'
+			options: '/custom/base/custom/options.js',
 		})
 	})
 })

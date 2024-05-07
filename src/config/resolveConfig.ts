@@ -1,18 +1,20 @@
 import { resolve } from 'node:path'
 import type { GeneratorOptions } from '@prisma/generator-helper'
 import defaultConfig from './defaultConfig.json' assert { type: 'json' }
+import assert from 'node:assert'
 
 export type Config = typeof defaultConfig
 
-const { output: defaultOutput, ...defaultInputConfig } = defaultConfig
-
 export function resolveConfig(options: GeneratorOptions): Config {
 	const inputConfig = resolveInputConfig(options)
-	const output = options.generator.output?.value ?? defaultOutput
+	const output = options.generator.output?.value
+	// since defaultOutput is defined in the manifest, output should be defined
+	assert(output != null, 'Received null output')
 	return { ...inputConfig, output }
 }
 
 function resolveInputConfig(options: GeneratorOptions): Omit<Config, 'output'> {
+	const { output: _, ...defaultInputConfig } = defaultConfig
 	const { inputBasePath, ...requiredConfig } = mapValues(
 		defaultInputConfig,
 		(value, key) => first(options.generator.config[key]) ?? value,
