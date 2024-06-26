@@ -1,5 +1,5 @@
 import helper from '@prisma/generator-helper'
-import defaultConfig from './config/defaultConfig.json' assert { type: 'json' }
+import defaultConfig from './config/defaultConfig.json' with { type: 'json' }
 import { resolveConfig } from './config/resolveConfig.js'
 import { generate } from './generate.js'
 import { readInputFiles } from './io/readInputFiles.js'
