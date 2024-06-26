@@ -1,4 +1,4 @@
-import { readFile, readdir } from 'node:fs/promises'
+import { readFile, readdir, readlink } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { relative } from 'node:path'
 import type { HelperDeclareSpec, RuntimeOptions, compile } from 'handlebars'
@@ -66,14 +66,30 @@ async function readFilesRecursively(
 	path: string,
 ): Promise<Map<string, string>> {
 	const entries = await readdir(path, { withFileTypes: true, recursive: true })
-	const files = entries.filter((entry) => entry.isFile())
+	const filePaths = entries
+		.filter((entry) => entry.isFile())
+		.map((file) => {
+			const filePath = resolve(file.path, file.name)
+			const entryPath = relative(path, filePath)
+			return { filePath, entryPath }
+		})
+	const symbolicLinkPaths = await Promise.all(
+		entries
+			.filter((entry) => entry.isSymbolicLink())
+			.map(async (link) => {
+				const linkFullPath = resolve(link.path, link.name)
+				const linkReference = await readlink(linkFullPath)
+				const filePath = resolve(link.path, linkReference)
+				const entryPath = relative(path, linkFullPath)
+				return { filePath, entryPath }
+			}),
+	)
+	const paths = [...filePaths, ...symbolicLinkPaths]
 	return new Map(
 		await Promise.all(
-			files.map(async (file) => {
-				const fullPath = resolve(file.path, file.name)
-				const relativePath = relative(path, fullPath)
-				const content = await readFile(fullPath, { encoding: 'utf8' })
-				return [relativePath, content] as const
+			paths.map(async ({ filePath, entryPath }) => {
+				const content = await readFile(filePath, { encoding: 'utf8' })
+				return [entryPath, content] as const
 			}),
 		),
 	)
