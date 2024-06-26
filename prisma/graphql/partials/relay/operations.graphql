@@ -1,7 +1,7 @@
 type Query {
     {{#each operations}}
     {{ camelCase model }}(id: ID!): {{ pascalCase model}}
-    {{ camelCase (plural model) }}(first: Int, after: ID, last: Int, before: ID, where: {{ pascalCase model }}WhereInput, orderBy: {{ pascalCase model }}OrderByWithRelationInput): {{ pascalCase model }}Connection!
+    {{ camelCase (plural model) }}(first: Int, after: ID, last: Int, before: ID, where: {{ pascalCase model }}WhereInput, orderBy: [{{ pascalCase model }}OrderByWithRelationInput!]): {{ pascalCase model }}Connection!
     {{/each}}
 }
 

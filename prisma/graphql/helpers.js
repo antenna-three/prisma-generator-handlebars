@@ -12,16 +12,16 @@ export function fieldType() {
  */
 export function inputType() {
 	/**
-	 *
+	 * Prismaが受け付ける引数のうち、最も複雑なものをGraphQLの引数とする
 	 * @param {import('@prisma/generator-helper').DMMF.InputTypeRef} field
 	 * @returns number
 	 */
 	const priority = (field) =>
-		(field.isList ? 4 : 0) +
+		(field.isList ? 0 : 8) +
 		['inputObjectTypes', 'enumTypes', 'scalar', 'fieldRefTypes'].indexOf(
 			field.location,
-		)
-	return fieldType.bind(
-		Array.from(this.inputTypes).sort((a, b) => priority(a) - priority(b))[0],
-	)()
+		) * 2 +
+		['String', 'Null'].indexOf(field.type)
+	const rawInputType = Array.from(this.inputTypes).sort((a, b) => priority(a) - priority(b))[0]
+	return rawInputType.isList ? `[${rawInputType.type}]` : rawInputType.type
 }

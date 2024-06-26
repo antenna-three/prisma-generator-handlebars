@@ -16,7 +16,7 @@ type User implements Node {
     email: String!
     type: UserType!
     name: String
-    posts(first: Int, after: ID, last: Int, before: ID, where: PostWhereInput, orderBy: PostOrderByInput): PostConnection!
+    posts(first: Int, after: ID, last: Int, before: ID, where: PostWhereInput, orderBy: PostOrderByWithRelationInput): PostConnection!
 }
 
 type UserEdge {
@@ -52,9 +52,9 @@ type PostConnection {
 }
 
 input UserWhereInput {
-    AND: UserWhereInput
-    OR: UserWhereInput
-    NOT: UserWhereInput
+    AND: [UserWhereInput]
+    OR: [UserWhereInput]
+    NOT: [UserWhereInput]
     id: IntFilter
     email: StringFilter
     type: EnumUserTypeFilter
@@ -73,9 +73,9 @@ input UserOrderByWithRelationInput {
 input UserWhereUniqueInput {
     id: Int
     email: String
-    AND: UserWhereInput
-    OR: UserWhereInput
-    NOT: UserWhereInput
+    AND: [UserWhereInput]
+    OR: [UserWhereInput]
+    NOT: [UserWhereInput]
     type: EnumUserTypeFilter
     name: StringNullableFilter
     posts: PostListRelationFilter
@@ -94,9 +94,9 @@ input UserOrderByWithAggregationInput {
 }
 
 input UserScalarWhereWithAggregatesInput {
-    AND: UserScalarWhereWithAggregatesInput
-    OR: UserScalarWhereWithAggregatesInput
-    NOT: UserScalarWhereWithAggregatesInput
+    AND: [UserScalarWhereWithAggregatesInput]
+    OR: [UserScalarWhereWithAggregatesInput]
+    NOT: [UserScalarWhereWithAggregatesInput]
     id: IntWithAggregatesFilter
     email: StringWithAggregatesFilter
     type: EnumUserTypeWithAggregatesFilter
@@ -104,9 +104,9 @@ input UserScalarWhereWithAggregatesInput {
 }
 
 input PostWhereInput {
-    AND: PostWhereInput
-    OR: PostWhereInput
-    NOT: PostWhereInput
+    AND: [PostWhereInput]
+    OR: [PostWhereInput]
+    NOT: [PostWhereInput]
     id: IntFilter
     createdAt: DateTimeFilter
     updatedAt: DateTimeFilter
@@ -132,9 +132,9 @@ input PostOrderByWithRelationInput {
 
 input PostWhereUniqueInput {
     id: Int
-    AND: PostWhereInput
-    OR: PostWhereInput
-    NOT: PostWhereInput
+    AND: [PostWhereInput]
+    OR: [PostWhereInput]
+    NOT: [PostWhereInput]
     createdAt: DateTimeFilter
     updatedAt: DateTimeFilter
     title: StringFilter
@@ -162,9 +162,9 @@ input PostOrderByWithAggregationInput {
 }
 
 input PostScalarWhereWithAggregatesInput {
-    AND: PostScalarWhereWithAggregatesInput
-    OR: PostScalarWhereWithAggregatesInput
-    NOT: PostScalarWhereWithAggregatesInput
+    AND: [PostScalarWhereWithAggregatesInput]
+    OR: [PostScalarWhereWithAggregatesInput]
+    NOT: [PostScalarWhereWithAggregatesInput]
     id: IntWithAggregatesFilter
     createdAt: DateTimeWithAggregatesFilter
     updatedAt: DateTimeWithAggregatesFilter
@@ -300,8 +300,8 @@ input PostUncheckedUpdateManyInput {
 
 input IntFilter {
     equals: Int
-    in: ListIntFieldRefInput
-    notIn: ListIntFieldRefInput
+    in: [Int]
+    notIn: [Int]
     lt: Int
     lte: Int
     gt: Int
@@ -311,8 +311,8 @@ input IntFilter {
 
 input StringFilter {
     equals: String
-    in: ListStringFieldRefInput
-    notIn: ListStringFieldRefInput
+    in: [String]
+    notIn: [String]
     lt: String
     lte: String
     gt: String
@@ -326,15 +326,15 @@ input StringFilter {
 
 input EnumUserTypeFilter {
     equals: UserType
-    in: ListEnumUserTypeFieldRefInput
-    notIn: ListEnumUserTypeFieldRefInput
+    in: [UserType]
+    notIn: [UserType]
     not: NestedEnumUserTypeFilter
 }
 
 input StringNullableFilter {
     equals: String
-    in: Null
-    notIn: Null
+    in: [String]
+    notIn: [String]
     lt: String
     lte: String
     gt: String
@@ -392,8 +392,8 @@ input UserSumOrderByAggregateInput {
 
 input IntWithAggregatesFilter {
     equals: Int
-    in: ListIntFieldRefInput
-    notIn: ListIntFieldRefInput
+    in: [Int]
+    notIn: [Int]
     lt: Int
     lte: Int
     gt: Int
@@ -408,8 +408,8 @@ input IntWithAggregatesFilter {
 
 input StringWithAggregatesFilter {
     equals: String
-    in: ListStringFieldRefInput
-    notIn: ListStringFieldRefInput
+    in: [String]
+    notIn: [String]
     lt: String
     lte: String
     gt: String
@@ -426,8 +426,8 @@ input StringWithAggregatesFilter {
 
 input EnumUserTypeWithAggregatesFilter {
     equals: UserType
-    in: ListEnumUserTypeFieldRefInput
-    notIn: ListEnumUserTypeFieldRefInput
+    in: [UserType]
+    notIn: [UserType]
     not: NestedEnumUserTypeWithAggregatesFilter
     _count: NestedIntFilter
     _min: NestedEnumUserTypeFilter
@@ -436,8 +436,8 @@ input EnumUserTypeWithAggregatesFilter {
 
 input StringNullableWithAggregatesFilter {
     equals: String
-    in: Null
-    notIn: Null
+    in: [String]
+    notIn: [String]
     lt: String
     lte: String
     gt: String
@@ -454,8 +454,8 @@ input StringNullableWithAggregatesFilter {
 
 input DateTimeFilter {
     equals: DateTime
-    in: ListDateTimeFieldRefInput
-    notIn: ListDateTimeFieldRefInput
+    in: [DateTime]
+    notIn: [DateTime]
     lt: DateTime
     lte: DateTime
     gt: DateTime
@@ -470,8 +470,8 @@ input BoolFilter {
 
 input IntNullableFilter {
     equals: Int
-    in: Null
-    notIn: Null
+    in: [Int]
+    notIn: [Int]
     lt: Int
     lte: Int
     gt: Int
@@ -531,8 +531,8 @@ input PostSumOrderByAggregateInput {
 
 input DateTimeWithAggregatesFilter {
     equals: DateTime
-    in: ListDateTimeFieldRefInput
-    notIn: ListDateTimeFieldRefInput
+    in: [DateTime]
+    notIn: [DateTime]
     lt: DateTime
     lte: DateTime
     gt: DateTime
@@ -553,8 +553,8 @@ input BoolWithAggregatesFilter {
 
 input IntNullableWithAggregatesFilter {
     equals: Int
-    in: Null
-    notIn: Null
+    in: [Int]
+    notIn: [Int]
     lt: Int
     lte: Int
     gt: Int
@@ -568,17 +568,17 @@ input IntNullableWithAggregatesFilter {
 }
 
 input PostCreateNestedManyWithoutAuthorInput {
-    create: PostCreateWithoutAuthorInput
-    connectOrCreate: PostCreateOrConnectWithoutAuthorInput
+    create: [PostCreateWithoutAuthorInput]
+    connectOrCreate: [PostCreateOrConnectWithoutAuthorInput]
     createMany: PostCreateManyAuthorInputEnvelope
-    connect: PostWhereUniqueInput
+    connect: [PostWhereUniqueInput]
 }
 
 input PostUncheckedCreateNestedManyWithoutAuthorInput {
-    create: PostCreateWithoutAuthorInput
-    connectOrCreate: PostCreateOrConnectWithoutAuthorInput
+    create: [PostCreateWithoutAuthorInput]
+    connectOrCreate: [PostCreateOrConnectWithoutAuthorInput]
     createMany: PostCreateManyAuthorInputEnvelope
-    connect: PostWhereUniqueInput
+    connect: [PostWhereUniqueInput]
 }
 
 input StringFieldUpdateOperationsInput {
@@ -594,17 +594,17 @@ input NullableStringFieldUpdateOperationsInput {
 }
 
 input PostUpdateManyWithoutAuthorNestedInput {
-    create: PostCreateWithoutAuthorInput
-    connectOrCreate: PostCreateOrConnectWithoutAuthorInput
-    upsert: PostUpsertWithWhereUniqueWithoutAuthorInput
+    create: [PostCreateWithoutAuthorInput]
+    connectOrCreate: [PostCreateOrConnectWithoutAuthorInput]
+    upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput]
     createMany: PostCreateManyAuthorInputEnvelope
-    set: PostWhereUniqueInput
-    disconnect: PostWhereUniqueInput
-    delete: PostWhereUniqueInput
-    connect: PostWhereUniqueInput
-    update: PostUpdateWithWhereUniqueWithoutAuthorInput
-    updateMany: PostUpdateManyWithWhereWithoutAuthorInput
-    deleteMany: PostScalarWhereInput
+    set: [PostWhereUniqueInput]
+    disconnect: [PostWhereUniqueInput]
+    delete: [PostWhereUniqueInput]
+    connect: [PostWhereUniqueInput]
+    update: [PostUpdateWithWhereUniqueWithoutAuthorInput]
+    updateMany: [PostUpdateManyWithWhereWithoutAuthorInput]
+    deleteMany: [PostScalarWhereInput]
 }
 
 input IntFieldUpdateOperationsInput {
@@ -616,17 +616,17 @@ input IntFieldUpdateOperationsInput {
 }
 
 input PostUncheckedUpdateManyWithoutAuthorNestedInput {
-    create: PostCreateWithoutAuthorInput
-    connectOrCreate: PostCreateOrConnectWithoutAuthorInput
-    upsert: PostUpsertWithWhereUniqueWithoutAuthorInput
+    create: [PostCreateWithoutAuthorInput]
+    connectOrCreate: [PostCreateOrConnectWithoutAuthorInput]
+    upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput]
     createMany: PostCreateManyAuthorInputEnvelope
-    set: PostWhereUniqueInput
-    disconnect: PostWhereUniqueInput
-    delete: PostWhereUniqueInput
-    connect: PostWhereUniqueInput
-    update: PostUpdateWithWhereUniqueWithoutAuthorInput
-    updateMany: PostUpdateManyWithWhereWithoutAuthorInput
-    deleteMany: PostScalarWhereInput
+    set: [PostWhereUniqueInput]
+    disconnect: [PostWhereUniqueInput]
+    delete: [PostWhereUniqueInput]
+    connect: [PostWhereUniqueInput]
+    update: [PostUpdateWithWhereUniqueWithoutAuthorInput]
+    updateMany: [PostUpdateManyWithWhereWithoutAuthorInput]
+    deleteMany: [PostScalarWhereInput]
 }
 
 input UserCreateNestedOneWithoutPostsInput {
@@ -663,8 +663,8 @@ input NullableIntFieldUpdateOperationsInput {
 
 input NestedIntFilter {
     equals: Int
-    in: ListIntFieldRefInput
-    notIn: ListIntFieldRefInput
+    in: [Int]
+    notIn: [Int]
     lt: Int
     lte: Int
     gt: Int
@@ -674,8 +674,8 @@ input NestedIntFilter {
 
 input NestedStringFilter {
     equals: String
-    in: ListStringFieldRefInput
-    notIn: ListStringFieldRefInput
+    in: [String]
+    notIn: [String]
     lt: String
     lte: String
     gt: String
@@ -688,15 +688,15 @@ input NestedStringFilter {
 
 input NestedEnumUserTypeFilter {
     equals: UserType
-    in: ListEnumUserTypeFieldRefInput
-    notIn: ListEnumUserTypeFieldRefInput
+    in: [UserType]
+    notIn: [UserType]
     not: NestedEnumUserTypeFilter
 }
 
 input NestedStringNullableFilter {
     equals: String
-    in: Null
-    notIn: Null
+    in: [String]
+    notIn: [String]
     lt: String
     lte: String
     gt: String
@@ -709,8 +709,8 @@ input NestedStringNullableFilter {
 
 input NestedIntWithAggregatesFilter {
     equals: Int
-    in: ListIntFieldRefInput
-    notIn: ListIntFieldRefInput
+    in: [Int]
+    notIn: [Int]
     lt: Int
     lte: Int
     gt: Int
@@ -725,8 +725,8 @@ input NestedIntWithAggregatesFilter {
 
 input NestedFloatFilter {
     equals: Float
-    in: ListFloatFieldRefInput
-    notIn: ListFloatFieldRefInput
+    in: [Float]
+    notIn: [Float]
     lt: Float
     lte: Float
     gt: Float
@@ -736,8 +736,8 @@ input NestedFloatFilter {
 
 input NestedStringWithAggregatesFilter {
     equals: String
-    in: ListStringFieldRefInput
-    notIn: ListStringFieldRefInput
+    in: [String]
+    notIn: [String]
     lt: String
     lte: String
     gt: String
@@ -753,8 +753,8 @@ input NestedStringWithAggregatesFilter {
 
 input NestedEnumUserTypeWithAggregatesFilter {
     equals: UserType
-    in: ListEnumUserTypeFieldRefInput
-    notIn: ListEnumUserTypeFieldRefInput
+    in: [UserType]
+    notIn: [UserType]
     not: NestedEnumUserTypeWithAggregatesFilter
     _count: NestedIntFilter
     _min: NestedEnumUserTypeFilter
@@ -763,8 +763,8 @@ input NestedEnumUserTypeWithAggregatesFilter {
 
 input NestedStringNullableWithAggregatesFilter {
     equals: String
-    in: Null
-    notIn: Null
+    in: [String]
+    notIn: [String]
     lt: String
     lte: String
     gt: String
@@ -780,8 +780,8 @@ input NestedStringNullableWithAggregatesFilter {
 
 input NestedIntNullableFilter {
     equals: Int
-    in: Null
-    notIn: Null
+    in: [Int]
+    notIn: [Int]
     lt: Int
     lte: Int
     gt: Int
@@ -791,8 +791,8 @@ input NestedIntNullableFilter {
 
 input NestedDateTimeFilter {
     equals: DateTime
-    in: ListDateTimeFieldRefInput
-    notIn: ListDateTimeFieldRefInput
+    in: [DateTime]
+    notIn: [DateTime]
     lt: DateTime
     lte: DateTime
     gt: DateTime
@@ -807,8 +807,8 @@ input NestedBoolFilter {
 
 input NestedDateTimeWithAggregatesFilter {
     equals: DateTime
-    in: ListDateTimeFieldRefInput
-    notIn: ListDateTimeFieldRefInput
+    in: [DateTime]
+    notIn: [DateTime]
     lt: DateTime
     lte: DateTime
     gt: DateTime
@@ -829,8 +829,8 @@ input NestedBoolWithAggregatesFilter {
 
 input NestedIntNullableWithAggregatesFilter {
     equals: Int
-    in: Null
-    notIn: Null
+    in: [Int]
+    notIn: [Int]
     lt: Int
     lte: Int
     gt: Int
@@ -845,8 +845,8 @@ input NestedIntNullableWithAggregatesFilter {
 
 input NestedFloatNullableFilter {
     equals: Float
-    in: Null
-    notIn: Null
+    in: [Float]
+    notIn: [Float]
     lt: Float
     lte: Float
     gt: Float
@@ -879,7 +879,7 @@ input PostCreateOrConnectWithoutAuthorInput {
 }
 
 input PostCreateManyAuthorInputEnvelope {
-    data: PostCreateManyAuthorInput
+    data: [PostCreateManyAuthorInput]
     skipDuplicates: Boolean
 }
 
@@ -900,9 +900,9 @@ input PostUpdateManyWithWhereWithoutAuthorInput {
 }
 
 input PostScalarWhereInput {
-    AND: PostScalarWhereInput
-    OR: PostScalarWhereInput
-    NOT: PostScalarWhereInput
+    AND: [PostScalarWhereInput]
+    OR: [PostScalarWhereInput]
+    NOT: [PostScalarWhereInput]
     id: IntFilter
     createdAt: DateTimeFilter
     updatedAt: DateTimeFilter
@@ -1051,9 +1051,9 @@ input ListFloatFieldRefInput {
 
 type Query {
     user(id: ID!): User
-    users(first: Int, after: ID, last: Int, before: ID, where: UserWhereInput, orderBy: UserOrderByWithRelationInput): UserConnection!
+    users(first: Int, after: ID, last: Int, before: ID, where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!]): UserConnection!
     post(id: ID!): Post
-    posts(first: Int, after: ID, last: Int, before: ID, where: PostWhereInput, orderBy: PostOrderByWithRelationInput): PostConnection!
+    posts(first: Int, after: ID, last: Int, before: ID, where: PostWhereInput, orderBy: [PostOrderByWithRelationInput!]): PostConnection!
 }
 
 type Mutation {
