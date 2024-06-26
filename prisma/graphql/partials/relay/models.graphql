@@ -2,7 +2,7 @@
 type {{ pascalCase name }} implements Node {
     {{#each fields}}
     {{#if isList}}
-    {{ camelCase name }}(first: Int, after: ID, last: Int, before: ID, where: {{ type }}WhereInput, orderBy: {{ type }}OrderByInput): {{ type }}Connection!
+    {{ camelCase name }}(first: Int, after: ID, last: Int, before: ID, where: {{ type }}WhereInput, orderBy: {{ type }}OrderByWithRelationInput): {{ type }}Connection!
     {{else}}
     {{ camelCase name }}: {{ fieldType }}
     {{/if}}
