@@ -1,6 +1,6 @@
 import { resolve } from 'node:path'
 import type { GeneratorOptions } from '@prisma/generator-helper'
-import defaultConfig from './defaultConfig.json' assert { type: 'json' }
+import defaultConfig from './defaultConfig.json' with { type: 'json' }
 import assert from 'node:assert'
 
 export type Config = typeof defaultConfig
